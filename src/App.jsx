@@ -1,7 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import "boxicons";
 
 function App() {
+  const [fontSize, setFontSize] = useState(20); // Corrected useState usage
+  const [fontFamily, setFontFamily] = useState("Arial");
+  const [color, setColor] = useState("#000000");
+
+  const handleSelectChange = (event) => {
+    setFontFamily(event.target.value);
+  };
+
   return (
     <>
       <header>
@@ -24,41 +32,92 @@ function App() {
         <div
           className="bg-slate-200 rounded-lg col-span-4"
           style={{ height: "35rem" }}
-        ></div>
-        <div>
-          <div className="text-xl font-bold">Properties</div>
+        >
+          <div
+            style={{
+              fontSize: fontSize,
+              fontFamily: fontFamily,
+              background: color,
+            }}
+          >
+            simple
+          </div>
+        </div>
+        <div className="space-y-4 m-0">
+          <div className=" text-xl font-bold">Properties</div>
+
           <div>
-            <div className="label">
-              <span className="label-text">Select Font</span>
+            <h2>Select Font</h2>
+            <select
+              value={fontFamily}
+              onChange={handleSelectChange}
+              className="border-2 rounded-md"
+            >
+              <option value="">Select an option</option>
+              <option value="Arial">Arial</option>
+              <option value="Verdana">Verdana</option>
+              <option value="Other">Other</option>
+            </select>
+            <p>Selected Option: {fontFamily}</p>
+          </div>
+
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className="btn m-1">
+              Select Color <box-icon name="chevron-down"></box-icon>
             </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <a>Item 1</a>
+              </li>
+              <li>
+                <a>Item 2</a>
+              </li>
+            </ul>
+          </div>
+
+          <input
+            type="color"
+            value={color}
+            onChange={(event) => {
+              setColor(event.target.value);
+            }}
+          />
+          <div>{color}</div>
+
+          <div className="dropdown">
+            <button
+              className="btn btn-md"
+              onClick={() => {
+                setFontSize(fontSize + 1);
+              }}
+            >
+              Increase Font
+            </button>
+            <button
+              className="btn btn-md"
+              onClick={() => {
+                setFontSize(fontSize - 1);
+              }}
+            >
+              {" "}
+              Decrease Font
+            </button>
             <input
-              type="text"
-              placeholder="Type here"
-              className="input input-bordered w-full max-w-xs"
+              type="number"
+              value={fontSize}
+              onChange={(event) => {
+                setFontSize(event.target.value);
+              }}
             />
           </div>
-          <div>
-            <div className="label">
-              <span className="label-text">Select Size</span>
-            </div>
-            <input
-              type="text"
-              placeholder="Type here"
-              className="input input-bordered w-full max-w-xs"
-            />
-          </div>
-          <div>
-            <div className="label">
-              <span className="label-text">Select Color</span>
-            </div>
-            <input
-              type="text"
-              placeholder="Type here"
-              className="input input-bordered w-full max-w-xs"
-            />
-          </div>
-          <div className="mt-4">
-            <button className="btn btn-md">Add</button>
+
+          <div className="">
+            <button className="btn btn-md" onClick={() => {}}>
+              Add Text
+            </button>
           </div>
         </div>
       </div>
