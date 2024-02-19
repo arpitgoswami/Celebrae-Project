@@ -4,7 +4,8 @@ import "boxicons";
 function App() {
   const [fontSize, setFontSize] = useState(20); // Corrected useState usage
   const [fontFamily, setFontFamily] = useState("Arial");
-  const [color, setColor] = useState("#FFFFFF");
+  const [color, setColor] = useState("#000000");
+  const [text, setText] = useState("Example");
 
   const handleSelectChange = (event) => {
     setFontFamily(event.target.value);
@@ -30,23 +31,23 @@ function App() {
       </header>
       <div className="m-4 grid grid-cols-5 gap-4">
         <div
-          className="bg-slate-200 rounded-lg col-span-4"
+          className="bg-slate-200 rounded-lg col-span-3"
           style={{ height: "35rem" }}
         >
           <div
             style={{
               fontSize: fontSize,
               fontFamily: fontFamily,
-              background: color,
+              color: color,
             }}
           >
-            simple
+            {text}
           </div>
         </div>
         <div className="space-y-4 m-0">
           <div className=" text-xl font-bold">Properties</div>
 
-          <div>
+          <div className="flex items-center space-x-4">
             <h2>Select Font</h2>
             <select
               value={fontFamily}
@@ -58,10 +59,10 @@ function App() {
               <option value="Verdana">Verdana</option>
               <option value="Other">Other</option>
             </select>
-            <p>Selected Option: {fontFamily}</p>
           </div>
 
-          <div>
+          <div className="flex items-center space-x-4">
+            <div>Select Color</div>
             <input
               type="color"
               value={color}
@@ -72,9 +73,18 @@ function App() {
             <div>{color}</div>
           </div>
 
-          <div className="space-x-4">
+          <div className="space-x-4 flex items-center">
+            <div>Font Size</div>
+            <input
+              type="number"
+              value={fontSize}
+              className="border-2 rounded-md w-20"
+              onChange={(e) => {
+                setFontSize(parseInt(e.target.value));
+              }}
+            />
             <button
-              className="btn btn-sm btn-square btn-accent"
+              className="btn btn-sm btn-square"
               onClick={() => {
                 setFontSize(fontSize + 1);
               }}
@@ -82,26 +92,29 @@ function App() {
               <box-icon name="plus"></box-icon>
             </button>
             <button
-              className="btn btn-sm btn-square btn-accent"
+              className="btn btn-sm btn-square"
               onClick={() => {
                 setFontSize(fontSize - 1);
               }}
             >
               <box-icon name="minus"></box-icon>
             </button>
+          </div>
 
+          <div className="flex items-center space-x-4">
+            <div>Set Text</div>
             <input
-              type="number"
-              value={fontSize}
-              className="border-2"
+              type="text"
+              value={text}
+              className="border-2 rounded-md"
               onChange={(e) => {
-                setFontSize(parseInt(e.target.value));
+                setText(e.target.value);
               }}
             />
           </div>
 
           <div className="">
-            <button className="btn btn-md btn-accent" onClick={() => {}}>
+            <button className="btn btn-md" onClick={() => {}}>
               Add Text
             </button>
           </div>
